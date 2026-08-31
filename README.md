@@ -95,6 +95,41 @@ Revisit once typescript-eslint ships TS 7 support.
 
 ## Adding a workspace
 
+The quickest way is the built-in scaffolding CLI:
+
+```bash
+# Scaffold a shared library in packages/
+pnpm create:package my-lib
+
+# Scaffold a Node app in apps/
+pnpm create:package my-service apps node
+
+# Scaffold a React app in apps/
+pnpm create:package my-app apps react
+```
+
+The command creates the directory with `package.json`, `tsconfig.json`, `eslint.config.js`,
+`vitest.config.ts`, and a `src/index.ts` entry point — all wired to the shared configs.
+
+**Syntax:** `pnpm create:package <name> [apps|packages] [node|react|lib]`
+
+| Argument   | Default    | Description                                                   |
+| ---------- | ---------- | ------------------------------------------------------------- |
+| `name`     | (required) | Lowercase, hyphens allowed (e.g. `my-lib`)                    |
+| `folder`   | `packages` | `apps` or `packages`                                          |
+| `template` | `lib`\*    | `node` (Fastify-style), `react` (Vite SPA), `lib` (TS source) |
+
+\*When `folder` is `apps`, the template defaults to `node` instead.
+
+After scaffolding, run `pnpm install` to link the new workspace, then start developing:
+
+```bash
+pnpm install
+pnpm --filter @repo/<name> dev
+```
+
+If you need to set it up manually instead:
+
 1. Create `apps/<name>` or `packages/<name>` with a `package.json` named `@repo/<name>`.
 2. Extend a shared tsconfig: `"extends": "@repo/config/tsconfig/node"` (or `/react`).
 3. Add `eslint.config.js` re-exporting `@repo/config/eslint` (or `/eslint/react`).

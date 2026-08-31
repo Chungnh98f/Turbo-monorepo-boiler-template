@@ -37,7 +37,12 @@ export default tseslint.config(
   },
   // Config files are not covered by the app tsconfigs; lint them without type info.
   {
-    files: ['**/*.config.{js,ts,mjs,cjs}', '**/eslint.config.js', 'packages/config/**/*.js'],
+    files: [
+      '**/*.config.{js,ts,mjs,cjs}',
+      '**/eslint.config.js',
+      'packages/config/**/*.js',
+      'tools/**/*.ts',
+    ],
     extends: [tseslint.configs.disableTypeChecked],
   },
   // Must stay last: turns off stylistic rules that fight Prettier.
