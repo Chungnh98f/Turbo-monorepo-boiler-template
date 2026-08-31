@@ -14,15 +14,63 @@ in dependency order.
 
 ## Prerequisites
 
-| Tool   | Version | Notes                                             |
-| ------ | ------- | ------------------------------------------------- |
-| Node   | 22.23.2 | Pinned in `.nvmrc`, `engines`, and Volta config   |
-| pnpm   | 11.24.0 | `volta install pnpm@11.24.0` or `corepack enable` |
-| Docker | 28+     | Must be running before `tilt up`                  |
-| Tilt   | 0.34+   | https://docs.tilt.dev/install.html                |
+| Tool   | Version | Notes                              |
+| ------ | ------- | ---------------------------------- |
+| Node   | 22.23.2 | Managed by Volta (see below)       |
+| pnpm   | 11.24.0 | Managed by Volta (see below)       |
+| Docker | 28+     | Must be running before `tilt up`   |
+| Tilt   | 0.34+   | https://docs.tilt.dev/install.html |
 
 Node 22 is a hard floor, not a preference: Vite 8 requires `^20.19.0 || >=22.12.0` and ESLint 10
 requires `^20.19.0 || ^22.13.0 || >=24`.
+
+### Installing Node & pnpm with Volta
+
+This repo uses [Volta](https://volta.sh) to pin Node and pnpm versions per-project. The pinned
+versions live in `package.json` under the `"volta"` key, so every contributor gets the same
+toolchain automatically — no manual `nvm use` required.
+
+**1. Install Volta** (one-time, if you don't have it):
+
+```bash
+curl https://get.volta.sh | bash
+```
+
+This appends two lines to your shell profile (`~/.zshrc`, `~/.bashrc`, etc.):
+
+```bash
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+```
+
+**2. If you also have nvm / fnm / asdf / n installed**, Volta must appear **last** in your shell
+config so its PATH entry wins. The easiest approach: move the Volta lines to the **very end** of
+`~/.zshrc` (after any nvm/asdf/bun block), then restart your terminal:
+
+```bash
+# ── end of ~/.zshrc ──────────────────────────────────────────────────
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+```
+
+> **Why last?** Each `export PATH="...:$PATH"` prepends to PATH. The tool whose line runs last sits
+> first in PATH and wins `which node`. If nvm's `nvm.sh` runs _after_ Volta, nvm's Node shadows
+> Volta's — and you'll see the wrong version even though Volta is installed.
+
+Verify it works:
+
+```bash
+exec zsh              # reload shell
+node -v               # → v22.23.2  (matches package.json volta.node)
+which node            # → ~/.volta/bin/node
+pnpm -v               # → 11.24.0
+```
+
+**3. No extra install step.** Volta reads the `"volta"` block in `package.json` and transparently
+uses the right Node and pnpm when you `cd` into this repo. There is nothing to run — it just works.
+
+The repo also ships an `.nvmrc` for editors and CI environments that read it (GitHub Actions, VS
+Code, etc.), but Volta is the recommended local workflow.
 
 ## Layout
 
