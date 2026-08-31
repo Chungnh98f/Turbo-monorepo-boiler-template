@@ -1,0 +1,46 @@
+:root {
+  color-scheme: light dark;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  background: #1b1b1f;
+  color: #eaeaf0;
+}
+
+.app {
+  margin: 0 auto;
+  max-width: 40rem;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.app h1 {
+  margin-bottom: 0.25rem;
+}
+
+.app__subtitle {
+  color: #9a9aa8;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.app__result {
+  margin-top: 2rem;
+}
+
+.app__muted {
+  color: #9a9aa8;
+  font-size: 0.875rem;
+}
+
+.app__error {
+  color: #ff6b6b;
+  margin-top: 2rem;
+}

@@ -1,0 +1,3 @@
+/* Aggregate entry for consumers that want all @repo/ui styles in one import.
+   Components also import their own CSS, so this is optional. */
+@import './Button.css';

@@ -1,0 +1,44 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+# Single source of truth for versions. Workspaces reference these as "catalog:",
+# so a bump is a one-line change here.
+catalog:
+  '@eslint/js': 10.0.1
+  '@fastify/cors': 11.3.0
+  '@testing-library/jest-dom': 7.0.1
+  '@testing-library/react': 16.3.3
+  '@types/node': 26.4.0
+  '@types/react': 19.2.18
+  '@types/react-dom': 19.2.5
+  '@vitejs/plugin-react': 6.1.1
+  '@vitest/coverage-v8': 4.1.11
+  eslint: 10.9.1
+  eslint-config-prettier: 10.1.8
+  eslint-plugin-react-hooks: 7.1.1
+  fastify: 5.12.1
+  globals: 17.11.0
+  jsdom: 30.0.1
+  pino: 10.3.1
+  pino-pretty: 13.1.3
+  prettier: 3.9.6
+  react: 19.2.8
+  react-dom: 19.2.8
+  tsx: 4.23.12
+  typescript: 5.9.3
+  typescript-eslint: 8.68.0
+  vite: 8.2.2
+  vite-plugin-dts: 5.0.3
+  vitest: 4.1.11
+  zod: 4.4.3
+
+minimumReleaseAgeExclude:
+  - '@testing-library/react@16.3.3'
+  - '@vitejs/plugin-react@6.1.1'
+  - lint-staged@17.4.1
+
+# pnpm blocks postinstall scripts by default. esbuild needs one to place its
+# native binary, and Vite will not start without it.
+allowBuilds:
+  esbuild: true
