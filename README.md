@@ -186,7 +186,7 @@ tilt up
 
 ### How Tilt uses it
 
-The `Tiltfile` at the repo root calls `docker_compose('./docker-compose.yml')` and wires the
+The `Tiltfile` at the repo root calls `docker_compose('./infra/dev/docker-compose.yml')` and wires the
 containers as dependencies — the API won't start until Postgres passes its healthcheck. See
 [Architecture → Tilt owns local dev](#tilt-owns-local-dev) for the full picture.
 

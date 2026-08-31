@@ -4,7 +4,7 @@
 #   tilt up     bring everything up (UI at http://localhost:10350)
 #   tilt down   stop and remove the containers
 
-docker_compose('./docker-compose.yml')
+docker_compose('./infra/dev/docker-compose.yml')
 
 dc_resource('postgres', labels=['infra'])
 dc_resource('redis', labels=['infra'])
