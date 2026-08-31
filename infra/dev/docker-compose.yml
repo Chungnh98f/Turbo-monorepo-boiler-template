@@ -1,0 +1,59 @@
+services:
+  redis:
+    image: redis:7.2
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./storage/redis/data:/data
+
+  postgres:
+    image: postgres:17.2
+    restart: always
+    shm_size: 256mb
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_HOST_AUTH_METHOD: trust
+    # Make sure log colors show up correctly
+    tty: true
+    volumes:
+      - ./storage/postgres@17:/var/lib/postgresql/data/pgdata
+    command:
+      - -c
+      - listen_addresses=*
+      - -c
+      - wal_level=logical
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  s3:
+    image: minio/minio
+    restart: always
+    entrypoint: sh
+    command: -c 'mkdir -p /data/local-api /data/my-app && minio server /data --console-address ":9001"'
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - ./storage/s3:/data
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  stripe_mock:
+    image: stripe/stripe-mock:v0.182.0
+    restart: always
+    ports:
+      - '12111:12111'

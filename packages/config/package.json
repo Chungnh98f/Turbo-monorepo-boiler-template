@@ -1,0 +1,25 @@
+{
+  "name": "@repo/config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tsconfig/base": "./tsconfig/base.json",
+    "./tsconfig/node": "./tsconfig/node.json",
+    "./tsconfig/react": "./tsconfig/react.json",
+    "./eslint": "./eslint/index.js",
+    "./eslint/react": "./eslint/react.js",
+    "./prettier": "./prettier/index.json"
+  },
+  "dependencies": {
+    "@eslint/js": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "eslint-plugin-react-hooks": "catalog:",
+    "globals": "catalog:",
+    "typescript-eslint": "catalog:"
+  },
+  "peerDependencies": {
+    "eslint": "catalog:",
+    "typescript": "catalog:"
+  }
+}

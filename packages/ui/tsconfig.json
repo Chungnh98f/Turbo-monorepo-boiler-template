@@ -1,0 +1,9 @@
+{
+  "extends": "@repo/config/tsconfig/react",
+  "compilerOptions": {
+    "outDir": "dist",
+    "noEmit": false,
+    "emitDeclarationOnly": true
+  },
+  "include": ["src", "vite.config.ts", "eslint.config.js"]
+}

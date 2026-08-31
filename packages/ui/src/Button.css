@@ -1,0 +1,28 @@
+.repo-ui-button {
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  transition: filter 120ms ease;
+}
+
+.repo-ui-button:hover {
+  filter: brightness(1.1);
+}
+
+.repo-ui-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.repo-ui-button--primary {
+  background: #646cff;
+  color: #fff;
+}
+
+.repo-ui-button--secondary {
+  background: #2f2f3a;
+  color: #eaeaf0;
+}

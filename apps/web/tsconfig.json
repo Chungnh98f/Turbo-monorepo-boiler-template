@@ -1,0 +1,9 @@
+{
+  "extends": "@repo/config/tsconfig/react",
+  "compilerOptions": {
+    "paths": {
+      "@repo/ui": ["../../packages/ui/src/index.ts"]
+    }
+  },
+  "include": ["src", "vite.config.ts", "eslint.config.js"]
+}
