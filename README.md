@@ -331,6 +331,6 @@ Revisit once typescript-eslint ships TS 7 support.
 
 ---
 
-## License
+## License - test license
 
 MIT — see [LICENSE](./LICENSE).
